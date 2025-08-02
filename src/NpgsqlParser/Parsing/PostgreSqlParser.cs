@@ -2,7 +2,7 @@
 
 namespace NpgsqlParser.Parsing
 {
-    public class PostgreSqlParser : ISqlParser
+    public class PostgreSqlParser : ISqlParser test
     {
         public SelectStatement ParseSelect(List<Token> tokens)
         {
