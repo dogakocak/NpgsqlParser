@@ -9,49 +9,50 @@ namespace NpgsqlParser.Parsing
             var statement = new SelectStatement();
             int i = 0;
 
-            // Now, we wait for only SELECT statements.
-            if (tokens[i].Type != TokenType.Select)
-            {
-                throw new ArgumentException("Expected 'SELECT' at the beginning of the statement.");
-            }
-
+            ExpectToken(tokens, i, TokenType.Select, "Expected 'SELECT' at the beginning of the statement.");
             i++;
 
-            while (tokens[i].Type == TokenType.Identifier || tokens[i].Type == TokenType.Asterisk)
+            while (i < tokens.Count &&
+                  (tokens[i].Type == TokenType.Identifier || tokens[i].Type == TokenType.Asterisk))
             {
-                statement.Columns.Add(tokens[i].Value);
-                i++;
+                statement.Columns.Add(tokens[i++].Value);
 
-                if (tokens[i].Type == TokenType.Comma)
+                if (i < tokens.Count && tokens[i].Type == TokenType.Comma)
                 {
                     i++;
                 }
             }
 
-            if (tokens[i].Type != TokenType.From)
-            {
-                throw new ArgumentException("Expected 'FROM' after column definitions.");
-            }
-
+            ExpectToken(tokens, i, TokenType.From, "Expected 'FROM' after column definitions.");
             i++;
 
-            if (tokens[i].Type != TokenType.Identifier)
-            {
-                throw new ArgumentException("Expected table name after 'FROM'.");
-            }
-
-            statement.Table = tokens[i].Value;
+            var tableToken = ExpectToken(tokens, i, TokenType.Identifier, "Expected table name after 'FROM'.");
+            statement.Table = tableToken.Value;
             i++;
 
             if (i < tokens.Count && tokens[i].Type == TokenType.Where)
             {
                 i++;
+
+                if (i + 2 >= tokens.Count)
+                {
+                    throw new ArgumentException("Invalid WHERE clause.");
+                }
+
                 statement.WhereColumn = tokens[i++].Value;
                 statement.WhereOperator = tokens[i++].Value;
                 statement.WhereValue = tokens[i++].Value;
             }
 
             return statement;
+        }
+        private static Token ExpectToken(List<Token> tokens, int i, TokenType expectedType, string message)
+        {
+            if (i >= tokens.Count || tokens[i].Type != expectedType)
+            {
+                throw new ArgumentException(message);
+            }
+            return tokens[i];
         }
     }
 }
