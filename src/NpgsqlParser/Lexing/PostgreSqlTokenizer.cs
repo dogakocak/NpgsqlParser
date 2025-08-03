@@ -14,36 +14,82 @@ namespace NpgsqlParser.Lexing
         public List<Token> Tokenize(string input)
         {
             var tokens = new List<Token>();
-            var parts = input.Split([' ', ',', ';', '\n', '\r'], StringSplitOptions.RemoveEmptyEntries);
+            int i = 0;
 
-            foreach (var part in parts)
+            while (i < input.Length)
             {
-                string word = part.ToLower();
+                char current = input[i];
 
-                if (Keywords.TryGetValue(word, out TokenType value))
+                if (char.IsWhiteSpace(current) || current == ',' || current == ';')
                 {
-                    tokens.Add(new Token(value, word));
+                    i++;
+                    continue;
                 }
-                else if (int.TryParse(part, out _))
+
+                if (current == '\'') // Beginning string literal
                 {
-                    tokens.Add(new Token(TokenType.Number, part));
+                    int start = ++i;
+                    while (i < input.Length && (input[i] != '\'')) i++;
+
+                    if (i >= input.Length)
+                        throw new ArgumentException("Unterminated string literal.");
+
+                    string str = input[start..i];
+                    tokens.Add(new Token(TokenType.StringLiteral, str));
+                    i++; // closing '
+                    continue;
                 }
-                else if (part == "*")
+
+                if (char.IsDigit(current))
                 {
-                    tokens.Add(new Token(TokenType.Asterisk, part));
+                    int start = i;
+                    while (i < input.Length && char.IsDigit(input[i])) i++;
+                    tokens.Add(new Token(TokenType.Number, input[start..i]));
+                    continue;
                 }
-                else if (part == "=")
+
+                if (current == '*')
                 {
-                    tokens.Add(new Token(TokenType.Equal, part));
+                    tokens.Add(new Token(TokenType.Asterisk, "*"));
+                    i++;
+                    continue;
                 }
-                else if (part == ">")
+
+                if (current == '=')
                 {
-                    tokens.Add(new Token(TokenType.GreaterThan, part));
+                    tokens.Add(new Token(TokenType.Equal, "="));
+                    i++;
+                    continue;
                 }
-                else
+
+                if (current == '>')
                 {
-                    tokens.Add(new Token(TokenType.Identifier, part));
+                    tokens.Add(new Token(TokenType.GreaterThan, ">"));
+                    i++;
+                    continue;
                 }
+
+                // Identifier or keyword
+                if (char.IsLetter(current))
+                {
+                    int start = i;
+                    while (i < input.Length && (char.IsLetterOrDigit(input[i]) || input[i] == '_')) i++;
+
+                    string word = input.Substring(start, i - start).ToLower();
+
+                    if (Keywords.TryGetValue(word, out TokenType type))
+                    {
+                        tokens.Add(new Token(type, word));
+                    }
+                    else
+                    {
+                        tokens.Add(new Token(TokenType.Identifier, word));
+                    }
+
+                    continue;
+                }
+
+                throw new ArgumentException($"Unexpected character: {current}");
             }
 
             return tokens;
