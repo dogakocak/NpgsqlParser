@@ -1,6 +1,6 @@
-﻿using NpgsqlParser.Models;
+﻿using PgSqlParser.Models;
 
-namespace NpgsqlParser.Parsing
+namespace PgSqlParser.Parsing
 {
     public class PostgreSqlParser : ISqlParser
     {
