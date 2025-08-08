@@ -1,5 +1,5 @@
-﻿using NpgsqlParser.Lexing;
-using NpgsqlParser.Parsing;
+﻿using PgSqlParser.Lexing;
+using PgSqlParser.Parsing;
 using Xunit;
 
 namespace NpgsqlParser.UnitTests
