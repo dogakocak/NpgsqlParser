@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36221.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9F8E916F-9442-41F8-85E2-FCA3BE0A386E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{E66DDEB9-0666-40F6-982F-BAD708A6FAD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PgSqlParser", "src\PgSqlParser\PgSqlParser.csproj", "{9E7E3231-51F7-1C58-B6F0-0A44F4AC81AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PgSqlParser.UnitTests", "tests\PgSqlParser.UnitTests\PgSqlParser.UnitTests.csproj", "{D05EC8CD-8D42-417C-E213-3562FA46E950}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E7E3231-51F7-1C58-B6F0-0A44F4AC81AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E7E3231-51F7-1C58-B6F0-0A44F4AC81AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E7E3231-51F7-1C58-B6F0-0A44F4AC81AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E7E3231-51F7-1C58-B6F0-0A44F4AC81AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D05EC8CD-8D42-417C-E213-3562FA46E950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D05EC8CD-8D42-417C-E213-3562FA46E950}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D05EC8CD-8D42-417C-E213-3562FA46E950}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D05EC8CD-8D42-417C-E213-3562FA46E950}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9E7E3231-51F7-1C58-B6F0-0A44F4AC81AE} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{D05EC8CD-8D42-417C-E213-3562FA46E950} = {9F8E916F-9442-41F8-85E2-FCA3BE0A386E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB710DAE-28BD-4695-B823-7AA7A486C381}
+	EndGlobalSection
+EndGlobal

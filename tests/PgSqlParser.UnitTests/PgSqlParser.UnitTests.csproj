@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\NpgsqlParser\NpgsqlParser.csproj" />
+    <ProjectReference Include="..\..\src\PgSqlParser\PgSqlParser.csproj" />
   </ItemGroup>
 
 </Project>

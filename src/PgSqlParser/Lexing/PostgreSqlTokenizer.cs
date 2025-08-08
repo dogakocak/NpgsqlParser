@@ -1,6 +1,6 @@
-﻿using NpgsqlParser.Models;
+﻿using PgSqlParser.Models;
 
-namespace NpgsqlParser.Lexing
+namespace PgSqlParser.Lexing
 {
     public class PostgreSqlTokenizer : ISqlTokenizer
     {

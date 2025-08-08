@@ -1,4 +1,4 @@
-﻿namespace NpgsqlParser.Models
+﻿namespace PgSqlParser.Models
 {
     public class SelectStatement
     {
