@@ -1,11 +1,11 @@
-﻿namespace PgSqlParser.Models
+﻿namespace PgSqlParser.Models;
+
+public enum TokenType
 {
-    public enum TokenType
-    {
-        Select, From, Where,
-        Identifier, Number, Comma, Asterisk, Equal, GreaterThan, LessThan,
-        StringLiteral,
-        Semicolon,
-        Unknown
-    }
+    Select, From, Where,
+    Identifier, Number, Comma, Asterisk, Equal, GreaterThan, LessThan,
+    StringLiteral,
+    Semicolon,
+    Unknown,
+    EOF
 }
