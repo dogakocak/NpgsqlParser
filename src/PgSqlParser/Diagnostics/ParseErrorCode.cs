@@ -5,5 +5,7 @@
         None = 0,
         UnexpectedChar,
         UnterminatedString,
+        InvalidWhereClause,
+        UnexpectedToken
     }
 }

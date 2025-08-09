@@ -1,17 +1,17 @@
 ﻿using System.Diagnostics;
+using PgSqlParser.Models;
 
-namespace PgSqlParser.Diagnostics
+namespace PgSqlParser.Diagnostics;
+
+[DebuggerDisplay("{Code} @ {Span.Start}")]
+public readonly struct ParseError(ParseErrorCode code, TextSpan span,
+                  TokenType? expected = null, TokenType? actual = null)
 {
-    [DebuggerDisplay("{Code} @ {Position}")]
-    public readonly struct ParseError
-    {
-        public ParseErrorCode Code { get; }
-        public int Position { get; }
+    public ParseErrorCode Code { get; } = code;
+    public TextSpan Span { get; } = span;
+    public TokenType? Expected { get; } = expected;
+    public TokenType? Actual { get; } = actual;
 
-        public ParseError(ParseErrorCode code, int position)
-            => (Code, Position) = (code, position);
-
-        public bool IsError => Code != ParseErrorCode.None;
-        public override string ToString() => $"{Code} at {Position}";
-    }
+    public bool IsError => Code != ParseErrorCode.None;
+    public override string ToString() => $"{Code} at {Span.Start}";
 }

@@ -6,5 +6,6 @@ public enum TokenType
     Identifier, Number, Comma, Asterisk, Equal, GreaterThan, LessThan,
     StringLiteral,
     Semicolon,
-    Unknown
+    Unknown,
+    EOF
 }
