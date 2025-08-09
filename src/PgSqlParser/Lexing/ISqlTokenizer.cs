@@ -1,9 +1,10 @@
-﻿using PgSqlParser.Models;
+﻿using PgSqlParser.Common.Result;
+using PgSqlParser.Diagnostics;
+using PgSqlParser.Models;
 
-namespace PgSqlParser.Lexing
+namespace PgSqlParser.Lexing;
+
+public interface ISqlTokenizer
 {
-    public interface ISqlTokenizer
-    {
-        List<Token> Tokenize(string sql);
-    }
+    Result<List<Token>, ParseError> Tokenize(string sql);
 }
