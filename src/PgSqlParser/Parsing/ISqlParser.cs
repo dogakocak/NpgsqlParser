@@ -1,9 +1,11 @@
-﻿using PgSqlParser.Models;
+﻿using PgSqlParser.Common.Result;
+using PgSqlParser.Diagnostics;
+using PgSqlParser.Models;
 
 namespace PgSqlParser.Parsing
 {
     public interface ISqlParser
     {
-        SelectStatement ParseSelect(List<Token> tokens);
+        Result<SelectStatement, ParseError> ParseSelect(IReadOnlyList<Token> tokens);
     }
 }
